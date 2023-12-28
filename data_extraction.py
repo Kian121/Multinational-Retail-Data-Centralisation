@@ -7,7 +7,7 @@ import tabula
 
 class DataExtractor:
     def __init__(self):
-        # Initialization
+        # Initialisation
         pass
     
     def extract_from_csv(self, file_path):
@@ -20,18 +20,6 @@ class DataExtractor:
         response.raise_for_status()  # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
         return response.json()
     
-    def extract_from_s3(self, bucket_name, object_key, aws_access_key_id=None, aws_secret_access_key=None):
-        session = boto3.Session(
-            aws_access_key_id=aws_access_key_id,
-            aws_secret_access_key=aws_secret_access_key
-        )
-        s3 = session.client('s3')
-        csv_obj = s3.get_object(Bucket=bucket_name, Key=object_key)
-        body = csv_obj['Body']
-        csv_string = body.read().decode('utf-8')
-        df = pd.read_csv(StringIO(csv_string))
-        return df
-
     def read_rds_table(self, db_connector, table_name):
         engine = db_connector.init_db_engine()
         return pd.read_sql_table(table_name, engine)
@@ -85,7 +73,7 @@ class DataExtractor:
         bucket_name = s3_file_path.split('/')[2]
         object_key = '/'.join(s3_file_path.split('/')[3:])
 
-        # Initialize an S3 client
+        # Initialise an S3 client
         s3_client = boto3.client('s3')
 
         try:

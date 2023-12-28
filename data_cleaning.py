@@ -10,15 +10,6 @@ class DataCleaning:
         data_frame = data_frame.fillna("Unknown")
         return data_frame
 
-    def clean_csv_data(self, data_frame):
-        return self.clean_data_general(data_frame)
-
-    def clean_api_data(self, data_frame):
-        return self.clean_data_general(data_frame)
-
-    def clean_s3_data(self, data_frame):
-        return self.clean_data_general(data_frame)
-
     def clean_user_data(self, data_frame):
         return self.clean_data_general(data_frame)
 
@@ -41,17 +32,17 @@ class DataCleaning:
             if pd.isna(weight):
                 return None
 
-            # Remove all characters except numbers, decimal points, and known units
+            # Removes all characters except numbers, decimal points, and known units
             cleaned_weight = ''.join(char for char in weight if char.isdigit() or char in '.gmlkKGML')
 
-            # Split numeric part and unit
+            # Splits numeric part and unit
             numeric_part = ''.join(char for char in cleaned_weight if char.isdigit() or char == '.')
             unit_part = ''.join(char for char in cleaned_weight if char.isalpha())
 
             try:
                 numeric_weight = float(numeric_part)
                 if unit_part.lower() in ['g', 'ml']:
-                   return f"{numeric_weight / 1000} kg"  # Convert grams or ml to kg and append 'kg'
+                   return f"{numeric_weight / 1000} kg"  # Convers grams or ml to kg and append 'kg'
                 elif unit_part.lower() == 'kg':
                     return f"{numeric_weight} kg"  # Append 'kg'
                 else:
@@ -72,7 +63,7 @@ class DataCleaning:
         :param data_frame: DataFrame containing orders data.
         :return: Cleaned DataFrame.
         """
-        # Remove specified columns
+        # Removes specified columns
         columns_to_remove = ['first_name', 'last_name', '1']
         for col in columns_to_remove:
             if col in data_frame.columns:
