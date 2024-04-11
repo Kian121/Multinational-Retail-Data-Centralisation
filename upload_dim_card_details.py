@@ -10,7 +10,7 @@ import logging
 def process_pdf_data():
     logging.info("Starting the PDF data extraction process")
 
-    # Initialize data extraction, cleaning, and database connectors
+    # Initialise data extraction, cleaning, and database connectors
     data_cleaner = DataCleaning()
     db_connector = DatabaseConnector(DB_CREDS_PATH_AWS, DB_CREDS_PATH_LOCAL)
     data_extractor = DataExtractor(db_connector)
@@ -28,7 +28,7 @@ def process_pdf_data():
         cleaned_data = data_cleaner.clean_card_data(extracted_data)
         logging.info("Data cleaned successfully. Now uploading to the database")
 
-        # Upload cleaned data to the 'dim_card_details' table in your database
+        # Upload cleaned data to the 'dim_card_details' table into the database
         db_connector.upload_to_db(cleaned_data, "dim_card_details")
         logging.info("Data uploaded successfully to table.")
     else:

@@ -8,7 +8,7 @@ import logging
 
 
 def extract_dim_date():
-    # Initialize the database connector
+    # Initialise the database connector
     db_connector = DatabaseConnector(DB_CREDS_PATH_AWS, DB_CREDS_PATH_LOCAL)
     # Download JSON data
     json_url = (

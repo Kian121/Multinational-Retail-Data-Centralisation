@@ -10,7 +10,7 @@ def add_primary_keys():
     # Create an instance of DatabaseConnector
     db_connector = DatabaseConnector(DB_CREDS_PATH_LOCAL)
 
-    # Initialize the database engine
+    # Initialise the database engine
     engine = db_connector.init_db_engine(source=True)
 
     try:
