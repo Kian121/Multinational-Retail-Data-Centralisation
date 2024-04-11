@@ -43,6 +43,9 @@ db_creds.yaml
 pgdb_creds.yaml
 api_creds.yaml
 
+![image1](/Users/kiansemnani/Documents/GitHub/multinational-retail-data-centralisation65/assets/images.png)
+
+
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
 
 ## File Structure 
@@ -54,6 +57,7 @@ database_utils.py: In this script, you'll find the 'DatabaseConnector' class. It
 data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
 
 ## Licence 
+
 MIT License Copyright (c) [2023] [Kian Semnani]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
