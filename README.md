@@ -43,7 +43,7 @@ db_creds.yaml
 pgdb_creds.yaml
 api_creds.yaml
 
-![image1](/Users/kiansemnani/Documents/GitHub/multinational-retail-data-centralisation65/assets/images.png)
+![image1](assets/images.png)
 
 
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
