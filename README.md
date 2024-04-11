@@ -10,17 +10,19 @@
 ## Introduction
 This multinational Retail data centralisation project is a comprehensive solution designed to streamline extraction, cleaning and querying data from multiple sources. The goal is to provide a reliable, efficient, and user-friendly tool for organised data storage and usage.
 
-Scenario: You work for a multinational company that sells various goods across the globe. Currently, their sales data is spread across many different data sources making it not easily accessible or analysable by current members of the team. In an effort to become more data-driven, your organisation would like to make its sales data accessible from one centralised location. Your first goal will be to produce a system that stores the current company data in a database so that it's accessed from one centralised location and acts as a single source of truth for sales data. You will then query the database to get up-to-date metrics for the business.
+Scenario: You work for a multinational company that sells various goods across the globe. Currently, their sales data is spread across many different data sources making it not easily accessible or analysable by current members of the team. In an effort to become more data-driven, your organisation would like to make its sales data accessible from one centralised location. The first task will be to produce a system that stores the current company data in a database so that it's accessed from one centralised location and acts as a single source of truth for sales data. The database will then be queried to get up-to-date metrics for the business.
 
 The primary goal of this project is to establish a centralized database system that consolidates the company's sales data, serving as a unified source of truth.
 
-This project extracts data from the following:
+This project extracts data from the following data types
 
 AWS RDS database
 AWS S3 bucket PDF
 AWS S3 bucket CSV
 AWS S3 bucket JSON
 REST API JSON
+
+Cleans the data and once cleaned uploads to the allocated database to later be queried and analysed.
 
 ## Installation Instructions
 Prerequisites: Ensure that you have the necessary pre-installed software ond dependencies installed on your system.
@@ -32,7 +34,7 @@ Requests
 SQLAlchemy
 tabula_py
 
-clone the Repository: Clone this repository to your local machine using: git clone [repository URL]
+Clone the Repository: Clone this repository to your local machine using: git clone [repository URL]
 Run the application
 
 ## Usage Instructions
@@ -43,10 +45,53 @@ db_creds.yaml
 pgdb_creds.yaml
 api_creds.yaml
 
-![image1](assets/images.png)
-
-
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
+
+
+Step 1:
+
+Create a db_creds.yaml file containing the database credentials
+
+![img1](assets/image1.png)
+
+Step 2:
+
+Create a method read_db_creds this will read the credentials yaml file and return a dictionary of the credentials.
+
+Step 3:
+
+Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return an sqlalchemy database engine.
+
+Step 4:
+
+Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from. Develop a method inside your DataExtractor class to read the data from the RDS database.
+
+Step 5:
+
+Develop a method called read_rds_table in your DataExtractor class which will extract the database table to a pandas DataFrame.
+
+Step 6:
+
+Create a method called clean_user_data in the DataCleaning class which will perform the cleaning of the user data.
+You will need clean the user data, look out for NULL values, errors with dates, incorrectly typed values and rows filled with the wrong information.
+
+Step 7:
+
+Now create a method in your DatabaseConnector class called upload_to_db. This method will take in a Pandas DataFrame and table name to upload to as an argument.
+
+Step 8:
+
+Once extracted and cleaned use the upload_to_db method to store the data in your sales_data database in a table named dim_users.
+
+step 9 / put in requiements 
+
+Install the Python package tabula-py this will help you to extract data from a pdf document. The documentation can be found here .
+
+
+
+
+
+
 
 ## File Structure 
 
