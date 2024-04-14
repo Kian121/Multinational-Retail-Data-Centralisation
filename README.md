@@ -255,7 +255,7 @@ GROUP BY country_code
 ORDER BY total_no_stores DESC;
 ```
 
-![img27](assets/q1.png)
+![img27](Assets/q1.png)
 
 
 ### Query to determine which locations have the most stores
@@ -268,7 +268,7 @@ ORDER BY total_no_stores DESC
 LIMIT 7;
 ```
 
-![img28](assets/q2.png)
+![img28](Assets/q2.png)
 
 ### Query to determine which month produced the largest amount of sales
 
@@ -282,7 +282,7 @@ ORDER BY total_sales DESC
 LIMIT 6;
 ```
 
-![img29](assets/q3.png)
+![img29](Assets/q3.png)
 
 ### Query to determine the number of online sales
 
@@ -302,7 +302,7 @@ GROUP BY
     END;
 ```
 
-![img30](assets/q4.png)
+![img30](Assets/q4.png)
 
 
 ### Query to determine how quickly the company is making sales
