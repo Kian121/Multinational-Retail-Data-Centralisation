@@ -1,4 +1,5 @@
 # Multinational Retail Data Centrialisation
+This project aims to consolidate sales data from various sources into a centralised database for a multinational company. This system will streamline data access and analysis, extracting from formats like AWS RDS, S3 buckets, and REST APIs.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -66,7 +67,7 @@ Now create a method init_db_engine which will read the credentials from the retu
 
 Step 4:
 
-Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from. Develop a method inside your DataExtractor class to read the data from the RDS database.
+Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from.Develop a method inside your DataExtractor class to read the data from the RDS database.
 
 Step 5:
 
@@ -99,7 +100,7 @@ Install the Python package tabula-py this will help you to extract data from a p
 
 Step 10
 
-Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame. Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link . Then return a DataFrame of the extracted data.
+Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link .Then return a DataFrame of the extracted data.
 
 ![img10](assets/image10.png)
 
@@ -140,7 +141,7 @@ Create another method retrieve_stores_data which will take the retrieve a store 
 
 Step 16
 
-Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame. 
+Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame.
 
 ![img16](assets/image16.png)
 
@@ -163,7 +164,7 @@ Create a method in the DataCleaning class called convert_product_weights this wi
 
 Step 20
 
-Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values. 
+Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values.
 
 Step 21
 
@@ -178,7 +179,7 @@ Using the database table listing methods you created earlier list_db_tables, lis
 
 Step 23
 
-Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame. 
+Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame.
 
 Step 24
 
@@ -186,7 +187,7 @@ Create a method in DataCleaning called clean_orders_data which will clean the or
 
 You should remove the columns, first_name, last_name and 1 to have the table in the correct form before uploading to the database.
 You will see that the orders data contains column headers which are the same in other tables.
-This table will act as the source of truth for your sales data and will be at the center of your star based database schema. 
+This table will act as the source of truth for your sales data and will be at the center of your star based database schema.
 
 Step 25
 
