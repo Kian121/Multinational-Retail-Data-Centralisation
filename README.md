@@ -46,11 +46,7 @@ api_creds.yaml
 
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
 
-
-
 ## File Structure 
-
-...
 
 data_cleaning.py: This file hosts the 'DataCleaning' class, which encompasses various methods dedicated to purifying and refining data derived from multiple sources.
 
@@ -182,7 +178,6 @@ Step 17:
 Upload your DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
 
 
-
 Step 18:
 
 Create a method in DataExtractor called extract_from_s3 which uses the boto3 package to download and extract the information returning a pandas DataFrame.
@@ -239,6 +234,8 @@ Step 25:
 
 Once cleaned upload using the upload_to_db method and store in a table called orders_table,
 
+
+
 Step 26:
 
 The final source of data is a JSON file containing the details of when each sale happened, as well as related attributes.
@@ -246,9 +243,6 @@ The file is currently stored on S3. Extract the file and perform any necessary c
 
 ![img26](assets/image26.png)
 
-Queries 
-
-.....
 
 
 ## Licence 

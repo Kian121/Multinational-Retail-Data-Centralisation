@@ -32,3 +32,6 @@ def extract_dim_date():
 if __name__ == "__main__":
     setup_logging()
     extract_dim_date()
+
+
+    

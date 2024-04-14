@@ -1,3 +1,22 @@
+
+#There are two latitude columns in the store details table. Using SQL, merge one of the columns into the other so you have one latitude column.
+
+#Then set the data types for each column as shown below:
+
+# +---------------------+-------------------+------------------------+
+# | store_details_table | current data type |   required data type   |
+# +---------------------+-------------------+------------------------+
+# | longitude           | TEXT              | FLOAT                  |
+# | locality            | TEXT              | VARCHAR(255)           |
+# | store_code          | TEXT              | VARCHAR(?)             |
+# | staff_numbers       | TEXT              | SMALLINT               |
+# | opening_date        | TEXT              | DATE                   |
+# | store_type          | TEXT              | VARCHAR(255) NULLABLE  |
+# | latitude            | TEXT              | FLOAT                  |
+# | country_code        | TEXT              | VARCHAR(?)             |
+# | continent           | TEXT              | VARCHAR(255)           |
+# +---------------------+-------------------+------------------------+
+
 from sqlalchemy import text
 from database_utils import DatabaseConnector
 

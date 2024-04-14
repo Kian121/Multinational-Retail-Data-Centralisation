@@ -1,3 +1,15 @@
+
+# Add a new column weight_class which will contain human-readable values based on the weight range of the product.
+
+# +--------------------------+-------------------+
+# | weight_class VARCHAR(?)  | weight range(kg)  |
+# +--------------------------+-------------------+
+# | Light                    | < 2               |
+# | Mid_Sized                | >= 2 - < 40       |
+# | Heavy                    | >= 40 - < 140     |
+# | Truck_Required           | => 140            |
+# +----------------------------+-----------------+
+
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from database_utils import DatabaseConnector

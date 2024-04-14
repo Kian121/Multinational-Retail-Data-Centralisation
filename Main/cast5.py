@@ -1,3 +1,19 @@
+
+# Make the changes to the columns to cast them to the following data types:
+
+# +-----------------+--------------------+--------------------+
+# |  dim_products   | current data type  | required data type |
+# +-----------------+--------------------+--------------------+
+# | product_price   | TEXT               | FLOAT              |
+# | weight          | TEXT               | FLOAT              |
+# | EAN             | TEXT               | VARCHAR(?)         |
+# | product_code    | TEXT               | VARCHAR(?)         |
+# | date_added      | TEXT               | DATE               |
+# | uuid            | TEXT               | UUID               |
+# | still_available | TEXT               | BOOL               |
+# | weight_class    | TEXT               | VARCHAR(?)         |
+# +-----------------+--------------------+--------------------+
+
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from database_utils import DatabaseConnector

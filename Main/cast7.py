@@ -1,3 +1,14 @@
+
+# Update the last table for the card details.
+
+# +------------------------+-------------------+--------------------+
+# |    dim_card_details    | current data type | required data type |
+# +------------------------+-------------------+--------------------+
+# | card_number            | TEXT              | VARCHAR(?)         |
+# | expiry_date            | TEXT              | VARCHAR(?)         |
+# | date_payment_confirmed | TEXT              | DATE               |
+# +------------------------+-------------------+--------------------+
+
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from database_utils import DatabaseConnector

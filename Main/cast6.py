@@ -1,3 +1,16 @@
+
+# Make the changes to the columns to cast them to the following data types:
+
+# +-----------------+-------------------+--------------------+
+# | dim_date_times  | current data type | required data type |
+# +-----------------+-------------------+--------------------+
+# | month           | TEXT              | VARCHAR(?)         |
+# | year            | TEXT              | VARCHAR(?)         |
+# | day             | TEXT              | VARCHAR(?)         |
+# | time_period     | TEXT              | VARCHAR(?)         |
+# | date_uuid       | TEXT              | UUID               |
+# +-----------------+-------------------+--------------------+
+
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from database_utils import DatabaseConnector
