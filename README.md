@@ -41,9 +41,9 @@ Then ensure that you have the necessary pre-installed software ond dependencies 
 
 To run this project, you will have to set up the following credentials and databases:
 
-db_creds.yaml
-pgdb_creds.yaml
-api_creds.yaml
+- db_creds.yaml
+- pgdb_creds.yaml
+- api_creds.yaml
 
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
 
