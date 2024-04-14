@@ -68,28 +68,28 @@ Create a db_creds.yaml file containing the database credentials
 
 Step 2:
 
-Create a method read_db_creds this will read the credentials yaml file and return a dictionary of the credentials.
+Create a method read_db_creds that will read the credentials yaml file and return a dictionary of the credentials.
 
 ![img2](assets/image2.png)
 
 
 Step 3:
 
-Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return an sqlalchemy database engine.
+Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return a sqlalchemy database engine.
 
 ![img3](assets/image3.png)
 
 
 Step 4:
 
-Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from.Develop a method inside your DataExtractor class to read the data from the RDS database.
+Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database then develop a method inside your DataExtractor class to read the data from the RDS database.
 
 ![img4](assets/image4.png)
 
 
 Step 5:
 
-Develop a method called read_rds_table in your DataExtractor class which will extract the database table to a pandas DataFrame.
+Develop a method called read_rds_table in the DataExtractor class which will extract the database table to a pandas DataFrame.
 
 ![img5](assets/image5.png)
 
@@ -97,20 +97,19 @@ Develop a method called read_rds_table in your DataExtractor class which will ex
 Step 6:
 
 Create a method called clean_user_data in the DataCleaning class which will perform the cleaning of the user data.
-You will need clean the user data, look out for NULL values, errors with dates, incorrectly typed values and rows filled with the wrong information.
 
 ![img6](assets/image6.png)
 
 Step 7:
 
-Now create a method in your DatabaseConnector class called upload_to_db. This method will take in a Pandas DataFrame and table name to upload to as an argument.
+Now create a method in the DatabaseConnector class called upload_to_db. This method will take in a Pandas DataFrame and table name to upload to as an argument.
 
 ![img7](assets/image7.png)
 
 
 Step 8:
 
-Once extracted and cleaned use the upload_to_db method to store the data in your sales_data database in a table named dim_users.
+Once extracted and cleaned use the upload_to_db method to store the data in the sales_data database in a table named dim_users.
 
 ![img8](assets/image8.png)
 
@@ -124,7 +123,7 @@ Install the Python package tabula-py this will help you to extract data from a p
 
 Step 10:
 
-Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link .Then return a DataFrame of the extracted data.
+Create a method in the DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document. Then return a DataFrame of the extracted data.
 
 ![img10](assets/image10.png)
 
@@ -132,7 +131,7 @@ Create a method in your DataExtractor class called retrieve_pdf_data, which take
 
 Step 11:
 
-Create a method called clean_card_data in your DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
+Create a method called clean_card_data in the DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
 
 ![img11](assets/image11.png)
 
@@ -140,7 +139,7 @@ Create a method called clean_card_data in your DataCleaning class to clean the d
 
 Step 12:
 
-Once cleaned, upload the table with your upload_to_db method to the database in a table called dim_card_details.
+Once cleaned, upload the table with the upload_to_db method to the database in a table called dim_card_details.
 
 ![img12](assets/image12.png)
 
@@ -148,7 +147,7 @@ Once cleaned, upload the table with your upload_to_db method to the database in 
 
 Step 13:
 
-Create a method in your DataExtractor class called list_number_of_stores which returns the number of stores to extract. It should take in the number of stores endpoint and header dictionary as an argument.
+Create a method in the DataExtractor class called list_number_of_stores which returns the number of stores to extract. It should take in the number of stores endpoint and header dictionary as an argument.
 
 ![img13](assets/image13.png)
 
@@ -156,7 +155,7 @@ Create a method in your DataExtractor class called list_number_of_stores which r
 
 Step 14:
 
-Now you know how many stores need to be extracted from the API.
+Take note of how many stores need to be extracted from the API.
 
 
 
@@ -176,20 +175,19 @@ Create a method in the DataCleaning class called_clean_store_data which cleans t
 
 Step 17:
 
-Upload your DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
+Upload the DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
 
 
 Step 18:
 
 Create a method in DataExtractor called extract_from_s3 which uses the boto3 package to download and extract the information returning a pandas DataFrame.
-The S3 address for the products data is the following s3://data-handling-public/products.csv the method will take this address in as an argument and return the pandas DataFrame.
 
 ![img18](assets/image18.png)
 
 
 Step 19:
 
-Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.If you check the weight column in the DataFrame the weights all have different units.Convert them all to a decimal value representing their weight in kg. Use a 1:1 ratio of ml to g as a rough estimate for the rows containing ml.Develop the method to clean up the weight column and remove all excess characters then represent the weights as a float.
+Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.
 
 ![img19](assets/image19.png)
 
@@ -203,19 +201,19 @@ Now create another method called clean_products_data this method will clean the 
 
 Step 21:
 
-Once complete insert the data into the sales_data database using your upload_to_db method storing it in a table named dim_products.
+Once complete insert the data into the sales_data database using the upload_to_db method storing it in a table named dim_products.
 
 ![img21](assets/image21.png)
 
 
 Step 22:
 
-Using the database table listing methods you created earlier list_db_tables, list all the tables in the database to get the name of the table containing all information about the product orders.
+Using the database table listing methods list_db_tables, list all the tables in the database to get the name of the table containing all information about the product orders.
 
 
 Step 23:
 
-Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame.
+Extract the orders data using the read_rds_table method returning a pandas DataFrame.
 
 ![img23](assets/image23.png)
 
@@ -224,9 +222,8 @@ Step 24:
 
 Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
 
-You should remove the columns, first_name, last_name and 1 to have the table in the correct form before uploading to the database.
-You will see that the orders data contains column headers which are the same in other tables.
-This table will act as the source of truth for your sales data and will be at the center of your star based database schema.
+Remove the columns, first_name, last_name and 1 to have the table in the correct form before uploading to the database.
+
 
 ![img24](assets/image24.png)
 
@@ -239,8 +236,7 @@ Once cleaned upload using the upload_to_db method and store in a table called or
 
 Step 26:
 
-The final source of data is a JSON file containing the details of when each sale happened, as well as related attributes.
-The file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
+The final source of data is a JSON file, the file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
 
 ![img26](assets/image26.png)
 
