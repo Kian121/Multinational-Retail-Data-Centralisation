@@ -1,5 +1,5 @@
 # Multinational Retail Data Centrialisation
-This project aims to consolidate sales data from various sources into a centralised database for a multinational company. This system will streamline data access and analysis, extracting from formats like AWS RDS, S3 buckets, and REST APIs.
+This project aims to consolidate sales data from various sources into a centralised database for a multinational company. This system will streamline data access and analysis, extracting from formats like AWS RDS, S3 buckets, and REST APIs. The primary goal is to establish a centralised database system that consolidates the company's sales data, serving as a unified source of truth.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -13,9 +13,7 @@ This multinational Retail data centralisation project is a comprehensive solutio
 
 Scenario: You work for a multinational company that sells various goods across the globe. Currently, their sales data is spread across many different data sources making it not easily accessible or analysable by current members of the team. In an effort to become more data-driven, your organisation would like to make its sales data accessible from one centralised location. The first task will be to produce a system that stores the current company data in a database so that it's accessed from one centralised location and acts as a single source of truth for sales data. The database will then be queried to get up-to-date metrics for the business.
 
-The primary goal of this project is to establish a centralised database system that consolidates the company's sales data, serving as a unified source of truth.
-
-This project extracts data from the following data types
+This project extracts data from the following data types before cleaning and uploading for acess and analysis.
 
 AWS RDS database
 AWS S3 bucket PDF
@@ -23,7 +21,6 @@ AWS S3 bucket CSV
 AWS S3 bucket JSON
 REST API JSON
 
-it then cleans the data and uploads to the allocated database to later be queried and analysed.
 
 ## Installation Instructions
 Prerequisites: Ensure that you have the necessary pre-installed software ond dependencies installed on your system.
@@ -49,6 +46,19 @@ api_creds.yaml
 You should now be able to run the upload scripts to start the data centralisation process. This will intialise the data extraction and cleaning processes, after which the processed data will be uploaded in a central PostgreSQL database.
 
 
+
+## File Structure 
+
+...
+
+data_cleaning.py: This file hosts the 'DataCleaning' class, which encompasses various methods dedicated to purifying and refining data derived from multiple sources.
+
+database_utils.py: In this script, you'll find the 'DatabaseConnector' class. Its primary role is to establish connections and facilitate data uploads to our database system.
+
+data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
+
+Below is a summary of the steps taken in this projects construction.
+
 Step 1:
 
 Create a db_creds.yaml file containing the database credentials
@@ -65,9 +75,13 @@ Step 3:
 
 Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return an sqlalchemy database engine.
 
+![img3](assets/image3.png)
+
 Step 4:
 
 Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from.Develop a method inside your DataExtractor class to read the data from the RDS database.
+
+![img4](assets/image4.png)
 
 Step 5:
 
@@ -98,14 +112,14 @@ Step 9 / put in requiements
 
 Install the Python package tabula-py this will help you to extract data from a pdf document. The documentation can be found here .
 
-Step 10
+Step 10:
 
 Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link .Then return a DataFrame of the extracted data.
 
 ![img10](assets/image10.png)
 
 
-Step 11
+Step 11:
 
 Create a method called clean_card_data in your DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
 
@@ -114,74 +128,74 @@ Create a method called clean_card_data in your DataCleaning class to clean the d
 
 
 
-Step 12
+Step 12:
 
 Once cleaned, upload the table with your upload_to_db method to the database in a table called dim_card_details.
 
 ![img12](assets/image12.png)
 
-Step 13
+Step 13:
 
 Create a method in your DataExtractor class called list_number_of_stores which returns the number of stores to extract. It should take in the number of stores endpoint and header dictionary as an argument.
 
 ![img13](assets/image13.png)
 
-Step 14
+Step 14:
 
-Now that you know how many stores need to be extracted from the API.
+Now you know how many stores need to be extracted from the API.
 
 
 
-Step 15
+Step 15:
 
 Create another method retrieve_stores_data which will take the retrieve a store endpoint as an argument and extracts all the stores from the API saving them in a pandas DataFrame.
 
 ![img15](assets/image15.png)
 
 
-Step 16
+Step 16:
 
 Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame.
 
 ![img16](assets/image16.png)
 
-Step 17
+Step 17:
 
 Upload your DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
 
-Step 18
+Step 18:
 
 Create a method in DataExtractor called extract_from_s3 which uses the boto3 package to download and extract the information returning a pandas DataFrame.
 The S3 address for the products data is the following s3://data-handling-public/products.csv the method will take this address in as an argument and return the pandas DataFrame.
 
 ![img18](assets/image18.png)
 
-Step 19
+Step 19:
 
 Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.If you check the weight column in the DataFrame the weights all have different units.Convert them all to a decimal value representing their weight in kg. Use a 1:1 ratio of ml to g as a rough estimate for the rows containing ml.Develop the method to clean up the weight column and remove all excess characters then represent the weights as a float.
 
 ![img19](assets/image19.png)
 
-Step 20
+Step 20:
 
 Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values.
 
-Step 21
+Step 21:
 
 Once complete insert the data into the sales_data database using your upload_to_db method storing it in a table named dim_products.
 
 ![img21](assets/image21.png)
 
-Step 22
+Step 22:
 
 Using the database table listing methods you created earlier list_db_tables, list all the tables in the database to get the name of the table containing all information about the product orders.
 
 
-Step 23
+Step 23:
 
 Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame.
 
-Step 24
+Step 24:
 
 Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
 
@@ -189,28 +203,19 @@ You should remove the columns, first_name, last_name and 1 to have the table in 
 You will see that the orders data contains column headers which are the same in other tables.
 This table will act as the source of truth for your sales data and will be at the center of your star based database schema.
 
-Step 25
+Step 25:
 
 Once cleaned upload using the upload_to_db method and store in a table called orders_table,
 
-Step 26
+Step 26:
 
 The final source of data is a JSON file containing the details of when each sale happened, as well as related attributes.
 The file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
 
 Queries 
 
-
 .....
 
-
-## File Structure 
-
-data_cleaning.py: This file hosts the 'DataCleaning' class, which encompasses various methods dedicated to purifying and refining data derived from multiple sources.
-
-database_utils.py: In this script, you'll find the 'DatabaseConnector' class. Its primary role is to establish connections and facilitate data uploads to our database system.
-
-data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
 
 ## Licence 
 
