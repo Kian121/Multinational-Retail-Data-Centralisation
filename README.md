@@ -68,11 +68,13 @@ Create a db_creds.yaml file containing the database credentials
 
 ![img1](assets/image1.png)
 
+
 Step 2:
 
 Create a method read_db_creds this will read the credentials yaml file and return a dictionary of the credentials.
 
 ![img2](assets/image2.png)
+
 
 Step 3:
 
@@ -80,17 +82,20 @@ Now create a method init_db_engine which will read the credentials from the retu
 
 ![img3](assets/image3.png)
 
+
 Step 4:
 
 Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database so you know which tables you can extract data from.Develop a method inside your DataExtractor class to read the data from the RDS database.
 
 ![img4](assets/image4.png)
 
+
 Step 5:
 
 Develop a method called read_rds_table in your DataExtractor class which will extract the database table to a pandas DataFrame.
 
 ![img5](assets/image5.png)
+
 
 Step 6:
 
@@ -105,11 +110,13 @@ Now create a method in your DatabaseConnector class called upload_to_db. This me
 
 ![img7](assets/image7.png)
 
+
 Step 8:
 
 Once extracted and cleaned use the upload_to_db method to store the data in your sales_data database in a table named dim_users.
 
 ![img8](assets/image8.png)
+
 
 Step 9:
 
@@ -117,11 +124,14 @@ Install the Python package tabula-py this will help you to extract data from a p
 
 ![img9](assets/image9.png)
 
+
 Step 10:
 
 Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link .Then return a DataFrame of the extracted data.
 
 ![img10](assets/image10.png)
+
+
 
 Step 11:
 
@@ -129,11 +139,15 @@ Create a method called clean_card_data in your DataCleaning class to clean the d
 
 ![img11](assets/image11.png)
 
+
+
 Step 12:
 
 Once cleaned, upload the table with your upload_to_db method to the database in a table called dim_card_details.
 
 ![img12](assets/image12.png)
+
+
 
 Step 13:
 
@@ -141,9 +155,13 @@ Create a method in your DataExtractor class called list_number_of_stores which r
 
 ![img13](assets/image13.png)
 
+
+
 Step 14:
 
 Now you know how many stores need to be extracted from the API.
+
+
 
 Step 15:
 
@@ -151,11 +169,13 @@ Create another method retrieve_stores_data which will take the retrieve a store 
 
 ![img15](assets/image15.png)
 
+
 Step 16:
 
 Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame.
 
 ![img16](assets/image16.png)
+
 
 Step 17:
 
@@ -170,11 +190,13 @@ The S3 address for the products data is the following s3://data-handling-public/
 
 ![img18](assets/image18.png)
 
+
 Step 19:
 
 Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.If you check the weight column in the DataFrame the weights all have different units.Convert them all to a decimal value representing their weight in kg. Use a 1:1 ratio of ml to g as a rough estimate for the rows containing ml.Develop the method to clean up the weight column and remove all excess characters then represent the weights as a float.
 
 ![img19](assets/image19.png)
+
 
 Step 20:
 
@@ -182,11 +204,13 @@ Now create another method called clean_products_data this method will clean the 
 
 ![img20](assets/image20.png)
 
+
 Step 21:
 
 Once complete insert the data into the sales_data database using your upload_to_db method storing it in a table named dim_products.
 
 ![img21](assets/image21.png)
+
 
 Step 22:
 
@@ -199,6 +223,7 @@ Extract the orders data using the read_rds_table method you create earlier retur
 
 ![img23](assets/image23.png)
 
+
 Step 24:
 
 Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
@@ -208,6 +233,7 @@ You will see that the orders data contains column headers which are the same in 
 This table will act as the source of truth for your sales data and will be at the center of your star based database schema.
 
 ![img24](assets/image24.png)
+
 
 Step 25:
 
