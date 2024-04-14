@@ -6,7 +6,8 @@ This project aims to consolidate sales data from various sources into a centrali
 2. [Installation Instructions](#installation-instructions)
 3. [Usage Instructions](#usage-instructions)
 4. [File Structure](#file-structure)
-5. [License](#license)
+5. [Breakdown](#breakdown)
+6. [License](#license)
 
 ## Introduction
 This multinational Retail data centralisation project is a comprehensive solution designed to streamline extraction, cleaning and querying data from multiple sources. The goal is to provide a reliable, efficient, and user-friendly tool for organised data storage and usage.
@@ -57,6 +58,8 @@ database_utils.py: In this script, you'll find the 'DatabaseConnector' class. It
 
 data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
 
+## Breakdown
+
 Below is a summary of the steps taken in this projects construction.
 
 Step 1:
@@ -106,11 +109,13 @@ Step 8:
 
 Once extracted and cleaned use the upload_to_db method to store the data in your sales_data database in a table named dim_users.
 
+![img8](assets/image8.png)
 
+Step 9:
 
-Step 9 / put in requiements 
+Install the Python package tabula-py this will help you to extract data from a pdf document.
 
-Install the Python package tabula-py this will help you to extract data from a pdf document. The documentation can be found here .
+![img9](assets/image9.png)
 
 Step 10:
 
@@ -118,15 +123,11 @@ Create a method in your DataExtractor class called retrieve_pdf_data, which take
 
 ![img10](assets/image10.png)
 
-
 Step 11:
 
 Create a method called clean_card_data in your DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
 
-
 ![img11](assets/image11.png)
-
-
 
 Step 12:
 
@@ -144,14 +145,11 @@ Step 14:
 
 Now you know how many stores need to be extracted from the API.
 
-
-
 Step 15:
 
 Create another method retrieve_stores_data which will take the retrieve a store endpoint as an argument and extracts all the stores from the API saving them in a pandas DataFrame.
 
 ![img15](assets/image15.png)
-
 
 Step 16:
 
@@ -162,6 +160,8 @@ Create a method in the DataCleaning class called_clean_store_data which cleans t
 Step 17:
 
 Upload your DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
+
+
 
 Step 18:
 
@@ -180,6 +180,8 @@ Step 20:
 
 Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values.
 
+![img20](assets/image20.png)
+
 Step 21:
 
 Once complete insert the data into the sales_data database using your upload_to_db method storing it in a table named dim_products.
@@ -195,6 +197,8 @@ Step 23:
 
 Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame.
 
+![img23](assets/image23.png)
+
 Step 24:
 
 Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
@@ -202,6 +206,8 @@ Create a method in DataCleaning called clean_orders_data which will clean the or
 You should remove the columns, first_name, last_name and 1 to have the table in the correct form before uploading to the database.
 You will see that the orders data contains column headers which are the same in other tables.
 This table will act as the source of truth for your sales data and will be at the center of your star based database schema.
+
+![img24](assets/image24.png)
 
 Step 25:
 
@@ -211,6 +217,8 @@ Step 26:
 
 The final source of data is a JSON file containing the details of when each sale happened, as well as related attributes.
 The file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
+
+![img26](assets/image26.png)
 
 Queries 
 
