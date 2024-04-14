@@ -55,12 +55,6 @@ database_utils.py: In this script, you'll find the 'DatabaseConnector' class. It
 
 data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
 
-casts 
-
-keys
-
-queries 
-
 ## Breakdown
 
 Below is a summary of the steps taken in this projects construction.
