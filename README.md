@@ -55,6 +55,12 @@ database_utils.py: In this script, you'll find the 'DatabaseConnector' class. It
 
 data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal utility tool for retrieving data from a diverse array of sources. It includes functionalities for processing data from formats like CSV files, tapping into APIs, and accessing contents stored in an S3 bucket.
 
+casts 
+
+keys
+
+queries 
+
 ## Breakdown
 
 Below is a summary of the steps taken in this projects construction.
@@ -240,6 +246,105 @@ The final source of data is a JSON file, the file is currently stored on S3. Ext
 
 ![img26](assets/image26.png)
 
+
+For developing the database schema please see casts 1-7 in main.
+
+After setting appropriate data types for the tables, primary keys are added to each 'dim' prefixed table, which then serve as references for foreign keys in the orders_table, creating a complete star-based database schema. This setup ensures each primary key in the dimension tables matches and links to corresponding foreign keys in the orders_table, establishing a reliable structure for managing orders data.
+
+SQL Queries 
+
+Below you can find a selection of SQL queries used in this project along with the results. The rest of the queries from this project can be found in the queries folder.
+
+## Query to Determine Number of Stores and Their Countries
+
+```sql
+SELECT country_code AS country, COUNT(*) AS total_no_stores
+FROM dim_store_details
+GROUP BY country_code
+ORDER BY total_no_stores DESC;
+```
+
+![img27](assets/q1.png)
+
+
+## Query to determine which locations have the most stores
+
+```sql
+SELECT locality, COUNT(*) AS total_no_stores
+FROM dim_store_details
+GROUP BY locality
+ORDER BY total_no_stores DESC
+LIMIT 7;
+```
+
+![img28](assets/q2.png)
+
+## Query to determine which month produced the largest amount of sales
+
+```sql
+SELECT ROUND(SUM(ot.product_quantity * dp.product_price)::numeric, 2) AS total_sales, dt.month
+FROM orders_table ot
+JOIN dim_date_times dt ON ot.date_uuid = dt.date_uuid
+JOIN dim_products dp ON ot.product_code = dp.product_code
+GROUP BY dt.month
+ORDER BY total_sales DESC
+LIMIT 6;
+```
+
+![img29](assets/q3.png)
+
+## Query to determine the number of online sales
+
+```sql
+SELECT 
+    COUNT(*) AS numbers_of_sales, 
+    SUM(product_quantity) AS product_quantity_count, 
+    CASE 
+        WHEN store_code LIKE 'WEB%' THEN 'web'
+        ELSE 'offline'
+    END AS location
+FROM orders_table
+GROUP BY 
+    CASE 
+        WHEN store_code LIKE 'WEB%' THEN 'web'
+        ELSE 'offline'
+    END;
+```
+
+![img30](assets/q4.png)
+
+
+## Query to determine how quickly the company is making sales
+
+```sql
+SELECT
+    year,
+    CONCAT(
+        '"hours": ', ROUND(AVG(diff) / 3600),
+        ', "minutes": ', ROUND((AVG(diff) % 3600) / 60),
+        ', "seconds": ', ROUND(AVG(diff) % 60),
+        ', "milliseconds": ', ROUND(AVG(diff * 1000) % 1000)
+    ) AS actual_time_taken
+FROM (
+    SELECT
+        dt.year,
+        EXTRACT(EPOCH FROM LEAD(TO_TIMESTAMP(dt.year || '-' || LPAD(dt.month, 2, '0') || '-' || LPAD(dt.day, 2, '0') || ' ' || dt.timestamp, 'YYYY-MM-DD HH24:MI:SS'), 1) OVER (PARTITION BY dt.year ORDER BY TO_TIMESTAMP(dt.year || '-' || LPAD(dt.month, 2, '0') || '-' || LPAD(dt.day, 2, '0') || ' ' || dt.timestamp, 'YYYY-MM-DD HH24:MI:SS'))) - 
+        EXTRACT(EPOCH FROM TO_TIMESTAMP(dt.year || '-' || LPAD(dt.month, 2, '0') || '-' || LPAD(dt.day, 2, '0') || ' ' || dt.timestamp, 'YYYY-MM-DD HH24:MI:SS')) AS diff
+    FROM
+        orders_table ot
+    JOIN
+        dim_date_times dt ON ot.date_uuid = dt.date_uuid
+) AS subquery
+WHERE
+    subquery.diff IS NOT NULL
+GROUP BY
+    year
+ORDER BY
+    AVG(diff) DESC
+LIMIT 5;
+```
+
+![img31](assets/q9.png)
 
 
 ## Licence 
