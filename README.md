@@ -29,12 +29,12 @@ Clone the Repository: Clone this repository to your local machine using: git clo
 
 Then ensure that you have the necessary pre-installed software ond dependencies installed on your system:
 
-- boto3
-- pandas
-- python
+- Boto3
+- Pandas
+- Python
 - Requests
 - SQLAlchemy
-- tabula-py
+- Tabula-py
 
 
 ## Usage Instructions
