@@ -335,7 +335,7 @@ ORDER BY
 LIMIT 5;
 ```
 
-![img31](assets/q9.png)
+![img31](Assets/q9.png)
 
 
 ## Licence 
