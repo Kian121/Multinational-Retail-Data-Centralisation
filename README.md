@@ -59,90 +59,89 @@ data_extraction.py: This script introduces the 'DataExtractor' class, a pivotal 
 
 Below is a summary of the steps taken in this projects construction.
 
-## Step 1:
+### Step 1:
 
 Create a db_creds.yaml file containing the database credentials
 
 ![img1](assets/image1.png)
 
 
-## Step 2:
+### Step 2:
 
 Create a method read_db_creds that will read the credentials yaml file and return a dictionary of the credentials.
 
 ![img2](assets/image2.png)
 
 
-## Step 3:
+### Step 3:
 
 Create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return a sqlalchemy database engine.
 
 ![img3](assets/image3.png)
 
 
-## Step 4:
+### Step 4:
 
 Using the engine from init_db_engine create a method list_db_tables to list all the tables in the database then develop a method inside your DataExtractor class to read the data from the RDS database.
 
 ![img4](assets/image4.png)
 
 
-## Step 5:
+### Step 5:
 
 Develop a method called read_rds_table in the DataExtractor class which will extract the database table to a pandas DataFrame.
 
 ![img5](assets/image5.png)
 
 
-## Step 6:
+### Step 6:
 
 Create a method called clean_user_data in the DataCleaning class which will perform the cleaning of the user data.
 
 ![img6](assets/image6.png)
 
-## Step 7:
+### Step 7:
 
 Now create a method in the DatabaseConnector class called upload_to_db. This method will take in a Pandas DataFrame and table name to upload to as an argument.
 
 ![img7](assets/image7.png)
 
-
-## Step 8:
+### Step 8:
 
 Once extracted and cleaned use the upload_to_db method to store the data in the sales_data database in a table named dim_users.
 
 ![img8](assets/image8.png)
 
 
-## Step 9:
+### Step 9:
 
 Install the Python package tabula-py this will help you to extract data from a pdf document.
 
 ![img9](assets/image9.png)
 
 
-## Step 10:
+### Step 10:
 
 Create a method in the DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame.Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document. Then return a DataFrame of the extracted data.
 
 ![img10](assets/image10.png)
 
 
-## Step 11:
+### Step 11:
 
 Create a method called clean_card_data in the DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
 
 ![img11](assets/image11.png)
 
 
-## Step 12:
+### Step 12:
 
 Once cleaned, upload the table with the upload_to_db method to the database in a table called dim_card_details.
 
 ![img12](assets/image12.png)
 
 
-## Step 13:
+### Step 13:
 
 Create a method in the DataExtractor class called list_number_of_stores which returns the number of stores to extract. It should take in the number of stores endpoint and header dictionary as an argument.
 
@@ -150,72 +149,72 @@ Create a method in the DataExtractor class called list_number_of_stores which re
 
 
 
-## Step 14:
+### Step 14:
 
 Note how many stores need to be extracted from the API.
 
 
 
-## Step 15:
+### Step 15:
 
 Create another method retrieve_stores_data which will take the retrieve a store endpoint as an argument and extracts all the stores from the API saving them in a pandas DataFrame.
 
 ![img15](assets/image15.png)
 
 
-## Step 16:
+### Step 16:
 
 Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame.
 
 ![img16](assets/image16.png)
 
 
-## Step 17:
+### Step 17:
 
 Upload the DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
 
 
-## Step 18:
+### Step 18:
 
 Create a method in DataExtractor called extract_from_s3 which uses the boto3 package to download and extract the information returning a pandas DataFrame.
 
 ![img18](assets/image18.png)
 
 
-## Step 19:
+### Step 19:
 
 Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.
 
 ![img19](assets/image19.png)
 
 
-## Step 20:
+### Step 20:
 
 Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values.
 
 ![img20](assets/image20.png)
 
 
-## Step 21:
+### Step 21:
 
 Once complete insert the data into the sales_data database using the upload_to_db method storing it in a table named dim_products.
 
 ![img21](assets/image21.png)
 
 
-## Step 22:
+### Step 22:
 
 Using the database table listing methods list_db_tables, list all the tables in the database to get the name of the table containing all information about the product orders.
 
 
-## Step 23:
+### Step 23:
 
 Extract the orders data using the read_rds_table method returning a pandas DataFrame.
 
 ![img23](assets/image23.png)
 
 
-## Step 24:
+### Step 24:
 
 Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
 
@@ -225,13 +224,13 @@ Remove the columns, first_name, last_name and 1 to have the table in the correct
 ![img24](assets/image24.png)
 
 
-## Step 25:
+### Step 25:
 
 Once cleaned upload using the upload_to_db method and store in a table called orders_table,
 
 
 
-## Step 26:
+### Step 26:
 
 The final source of data is a JSON file, the file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
 
@@ -259,7 +258,7 @@ ORDER BY total_no_stores DESC;
 ![img27](assets/q1.png)
 
 
-## Query to determine which locations have the most stores
+### Query to determine which locations have the most stores
 
 ```sql
 SELECT locality, COUNT(*) AS total_no_stores
@@ -271,7 +270,7 @@ LIMIT 7;
 
 ![img28](assets/q2.png)
 
-## Query to determine which month produced the largest amount of sales
+### Query to determine which month produced the largest amount of sales
 
 ```sql
 SELECT ROUND(SUM(ot.product_quantity * dp.product_price)::numeric, 2) AS total_sales, dt.month
@@ -285,7 +284,7 @@ LIMIT 6;
 
 ![img29](assets/q3.png)
 
-## Query to determine the number of online sales
+### Query to determine the number of online sales
 
 ```sql
 SELECT 
@@ -306,7 +305,7 @@ GROUP BY
 ![img30](assets/q4.png)
 
 
-## Query to determine how quickly the company is making sales
+### Query to determine how quickly the company is making sales
 
 ```sql
 SELECT
