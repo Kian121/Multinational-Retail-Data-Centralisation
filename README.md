@@ -75,7 +75,7 @@ Create a method read_db_creds that will read the credentials yaml file and retur
 
 Step 3:
 
-Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return a sqlalchemy database engine.
+Create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return a sqlalchemy database engine.
 
 ![img3](assets/image3.png)
 
