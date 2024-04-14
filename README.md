@@ -247,7 +247,7 @@ After setting appropriate data types for the tables, primary keys are added to e
 
 Below you can find a selection of SQL queries used in this project along with the results. The rest of the queries from this project can be found in the queries folder.
 
-## Query to Determine Number of Stores and Their Countries
+### Query to Determine Number of Stores and Their Countries
 
 ```sql
 SELECT country_code AS country, COUNT(*) AS total_no_stores
