@@ -24,7 +24,10 @@ This project extracts data from the following data types before cleaning and upl
 
 
 ## Installation Instructions
-Prerequisites: Ensure that you have the necessary pre-installed software ond dependencies installed on your system.
+
+Clone the Repository: Clone this repository to your local machine using: git clone [repository URL]
+
+Then ensure that you have the necessary pre-installed software ond dependencies installed on your system:
 
 - boto3
 - pandas
@@ -33,7 +36,6 @@ Prerequisites: Ensure that you have the necessary pre-installed software ond dep
 - SQLAlchemy
 - tabula-py
 
-Clone the Repository: Clone this repository to your local machine using: git clone [repository URL]
 
 ## Usage Instructions
 
