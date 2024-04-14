@@ -12,7 +12,7 @@ This multinational Retail data centralisation project is a comprehensive solutio
 
 Scenario: You work for a multinational company that sells various goods across the globe. Currently, their sales data is spread across many different data sources making it not easily accessible or analysable by current members of the team. In an effort to become more data-driven, your organisation would like to make its sales data accessible from one centralised location. The first task will be to produce a system that stores the current company data in a database so that it's accessed from one centralised location and acts as a single source of truth for sales data. The database will then be queried to get up-to-date metrics for the business.
 
-The primary goal of this project is to establish a centralized database system that consolidates the company's sales data, serving as a unified source of truth.
+The primary goal of this project is to establish a centralised database system that consolidates the company's sales data, serving as a unified source of truth.
 
 This project extracts data from the following data types
 
@@ -22,7 +22,7 @@ AWS S3 bucket CSV
 AWS S3 bucket JSON
 REST API JSON
 
-Cleans the data and once cleaned uploads to the allocated database to later be queried and analysed.
+it then cleans the data and uploads to the allocated database to later be queried and analysed.
 
 ## Installation Instructions
 Prerequisites: Ensure that you have the necessary pre-installed software ond dependencies installed on your system.
@@ -58,6 +58,8 @@ Step 2:
 
 Create a method read_db_creds this will read the credentials yaml file and return a dictionary of the credentials.
 
+![img2](assets/image2.png)
+
 Step 3:
 
 Now create a method init_db_engine which will read the credentials from the return of read_db_creds and initialise and return an sqlalchemy database engine.
@@ -70,27 +72,135 @@ Step 5:
 
 Develop a method called read_rds_table in your DataExtractor class which will extract the database table to a pandas DataFrame.
 
+![img5](assets/image5.png)
+
 Step 6:
 
 Create a method called clean_user_data in the DataCleaning class which will perform the cleaning of the user data.
 You will need clean the user data, look out for NULL values, errors with dates, incorrectly typed values and rows filled with the wrong information.
 
+![img6](assets/image6.png)
+
 Step 7:
 
 Now create a method in your DatabaseConnector class called upload_to_db. This method will take in a Pandas DataFrame and table name to upload to as an argument.
+
+![img7](assets/image7.png)
 
 Step 8:
 
 Once extracted and cleaned use the upload_to_db method to store the data in your sales_data database in a table named dim_users.
 
-step 9 / put in requiements 
+
+
+Step 9 / put in requiements 
 
 Install the Python package tabula-py this will help you to extract data from a pdf document. The documentation can be found here .
 
+Step 10
+
+Create a method in your DataExtractor class called retrieve_pdf_data, which takes in a link as an argument and returns a pandas DataFrame. Use the tabula-py Python package, imported with tabula to extract all pages from the pdf document at following link . Then return a DataFrame of the extracted data.
+
+![img10](assets/image10.png)
+
+
+Step 11
+
+Create a method called clean_card_data in your DataCleaning class to clean the data to remove any erroneous values, NULL values or errors with formatting.
+
+
+![img11](assets/image11.png)
 
 
 
+Step 12
 
+Once cleaned, upload the table with your upload_to_db method to the database in a table called dim_card_details.
+
+![img12](assets/image12.png)
+
+Step 13
+
+Create a method in your DataExtractor class called list_number_of_stores which returns the number of stores to extract. It should take in the number of stores endpoint and header dictionary as an argument.
+
+![img13](assets/image13.png)
+
+Step 14
+
+Now that you know how many stores need to be extracted from the API.
+
+
+
+Step 15
+
+Create another method retrieve_stores_data which will take the retrieve a store endpoint as an argument and extracts all the stores from the API saving them in a pandas DataFrame.
+
+![img15](assets/image15.png)
+
+
+Step 16
+
+Create a method in the DataCleaning class called_clean_store_data which cleans the data retrieve from the API and returns a pandas DataFrame. 
+
+![img16](assets/image16.png)
+
+Step 17
+
+Upload your DataFrame to the database using the upload_to_db method storing it in the table dim_store_details.
+
+Step 18
+
+Create a method in DataExtractor called extract_from_s3 which uses the boto3 package to download and extract the information returning a pandas DataFrame.
+The S3 address for the products data is the following s3://data-handling-public/products.csv the method will take this address in as an argument and return the pandas DataFrame.
+
+![img18](assets/image18.png)
+
+Step 19
+
+Create a method in the DataCleaning class called convert_product_weights this will take the products DataFrame as an argument and return the products DataFrame.If you check the weight column in the DataFrame the weights all have different units.Convert them all to a decimal value representing their weight in kg. Use a 1:1 ratio of ml to g as a rough estimate for the rows containing ml.Develop the method to clean up the weight column and remove all excess characters then represent the weights as a float.
+
+![img19](assets/image19.png)
+
+Step 20
+
+Now create another method called clean_products_data this method will clean the DataFrame of any additional erroneous values. 
+
+Step 21
+
+Once complete insert the data into the sales_data database using your upload_to_db method storing it in a table named dim_products.
+
+![img21](assets/image21.png)
+
+Step 22
+
+Using the database table listing methods you created earlier list_db_tables, list all the tables in the database to get the name of the table containing all information about the product orders.
+
+
+Step 23
+
+Extract the orders data using the read_rds_table method you create earlier returning a pandas DataFrame. 
+
+Step 24
+
+Create a method in DataCleaning called clean_orders_data which will clean the orders table data.
+
+You should remove the columns, first_name, last_name and 1 to have the table in the correct form before uploading to the database.
+You will see that the orders data contains column headers which are the same in other tables.
+This table will act as the source of truth for your sales data and will be at the center of your star based database schema. 
+
+Step 25
+
+Once cleaned upload using the upload_to_db method and store in a table called orders_table,
+
+Step 26
+
+The final source of data is a JSON file containing the details of when each sale happened, as well as related attributes.
+The file is currently stored on S3. Extract the file and perform any necessary cleaning, then upload the data to the database naming the table dim_date_times.
+
+Queries 
+
+
+.....
 
 
 ## File Structure 
