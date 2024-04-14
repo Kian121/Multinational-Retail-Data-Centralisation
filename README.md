@@ -16,25 +16,24 @@ Scenario: You work for a multinational company that sells various goods across t
 
 This project extracts data from the following data types before cleaning and uploading for acess and analysis.
 
-AWS RDS database
-AWS S3 bucket PDF
-AWS S3 bucket CSV
-AWS S3 bucket JSON
-REST API JSON
+- AWS RDS database
+- AWS S3 bucket PDF
+- AWS S3 bucket CSV
+- AWS S3 bucket JSON
+- REST API JSON
 
 
 ## Installation Instructions
 Prerequisites: Ensure that you have the necessary pre-installed software ond dependencies installed on your system.
 
-boto3
-pandas
-python
-Requests
-SQLAlchemy
-tabula_py
+- boto3
+- pandas
+- python
+- Requests
+- SQLAlchemy
+- tabula-py
 
 Clone the Repository: Clone this repository to your local machine using: git clone [repository URL]
-Run the application
 
 ## Usage Instructions
 
