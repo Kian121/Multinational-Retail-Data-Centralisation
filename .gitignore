@@ -3,4 +3,5 @@ db_creds.yaml
 pgdb_creds.yaml
 api_creds.yaml
 .DS_Store
+.vscode/settings.json
 
