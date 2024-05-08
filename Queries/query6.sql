@@ -1,3 +1,5 @@
+-- Which month in each year produced the highest cost of sales?
+
 SELECT 
     CAST(SUM(dp.product_price * ot.product_quantity) AS NUMERIC(10, 2)) AS total_sales, 
     ddt.year, 

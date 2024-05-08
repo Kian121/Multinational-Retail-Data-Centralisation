@@ -1,3 +1,5 @@
+-- What percentage of sale come through each type of store?
+
 WITH TotalSales AS (
     SELECT
         SUM(ot.product_quantity * dp.product_price) as Total

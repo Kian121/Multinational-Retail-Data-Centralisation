@@ -1,3 +1,5 @@
+-- How many sales are coming from online?
+
 SELECT 
     COUNT(*) AS numbers_of_sales, 
     SUM(product_quantity) AS product_quantity_count, 

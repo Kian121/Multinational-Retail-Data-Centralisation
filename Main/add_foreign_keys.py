@@ -1,3 +1,6 @@
+
+# Create the foreign keys in the orders_table to reference the primary keys in the other tables.
+
 import logging
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError

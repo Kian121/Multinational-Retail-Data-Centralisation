@@ -1,5 +1,7 @@
+-- Which German store type is selling the most?
+
 SELECT 
-    SUM(ot.product_quantity * dp.product_price) AS total_sales, 
+    ROUND(SUM(ot.product_quantity * dp.product_price)::numeric, 2) AS total_sales, 
     dsd.store_type, 
     dsd.country_code
 FROM 

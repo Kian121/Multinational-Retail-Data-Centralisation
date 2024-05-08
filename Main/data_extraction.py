@@ -22,7 +22,7 @@ class DataExtractor:
         return response.json()
 
     def read_rds_table(self, table_name):
-        # Use the stored db_connector to initialise the engine
+        # Uses the stored db_connector to initialise the engine
         engine = self.db_connector.init_db_engine()
         with engine.connect() as connection:
             return pd.read_sql_table(table_name, connection)

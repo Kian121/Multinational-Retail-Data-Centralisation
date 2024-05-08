@@ -1,3 +1,5 @@
+-- What is our staff headcount?
+
 SELECT 
     SUM(staff_numbers) AS total_staff_numbers, 
     country_code

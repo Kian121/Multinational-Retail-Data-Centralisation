@@ -1,3 +1,6 @@
+
+# Update the columns in the dim tables with a primary key that matches the same column in the orders_table.
+
 import logging
 from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError

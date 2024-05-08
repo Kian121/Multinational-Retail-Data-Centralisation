@@ -1,3 +1,5 @@
+-- How quickly is the company making sales?
+
 SELECT
     year,
     CONCAT(
